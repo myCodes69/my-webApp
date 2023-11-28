@@ -1,0 +1,49 @@
+
+<div class="container-fluid">
+    <div class="float-right">
+        Welcome {{activeUser}} !
+        <a href="javascript:void(0);" (click)="onLogout()">Logout</a>
+    </div>
+    
+    <div class="row">
+        {{serahcedFoodItem}}
+        <div class="panel">
+             <input type="text" [(ngModel)]="serahcedFoodItem" placeholder="Search Foods..." name="searchedItem" class="form-control">
+          <div class="row">
+            <div class="col">
+               Start Price:
+               <input type="range" name="range1" min="100" value="100" required 
+            class="form-control" [(ngModel)]="priceIndexFilter.startPriceIndex" max="10000">  
+            <span class="badge badge-pills badge-primary">{{priceIndexFilter.startPriceIndex | currency:'INR'}}</span>
+            </div>
+            <div class="col">
+                End Price:
+                <input type="range" name="range2" required class="form-control" 
+                [(ngModel)]="priceIndexFilter.endPriceIndex" value="100" min="100" max="10000">
+                <span class="badge badge-pills badge-success">{{priceIndexFilter.endPriceIndex | currency:'INR'}}</span>
+            </div>
+            <div class="col m-2 p-2">
+                <button class="btn btn-sm btn-outline-success" (click)="onGo()">Go</button>
+            </div>
+          </div>   
+        </div>
+        <div class="col-md-4" *ngFor="let foodItem of foodList |food_filter:serahcedFoodItem |paginate:{
+                                                               totalItems:totalFoodItems,
+                                                               itemsPerPage:3,
+                                                               currentPage:startLink
+        }">
+           <header class="modal-header"><h4>{{foodItem.food_name}}</h4></header>
+           <div class="card">
+            <div class="card-body">
+                <img [src]="foodItem.food_image" alt="No Image" [title]="foodItem.food_name" style="width:100%;height:200px;">
+            </div>
+           </div>
+           <p>{{foodItem.food_desc}}</p>
+           <p>Price:{{foodItem.food_price | currency:'INR'}}</p>
+           <p><button type="button" (click)="onBuy(foodItem._id)" class="btn btn-sm btn-outline-info">Buy</button></p>
+        </div>
+    </div>
+    <!--Showing the link of the Pageinations-->
+    <pagination-controls (pageChange)="startLink = $event"></pagination-controls>
+    
+</div>

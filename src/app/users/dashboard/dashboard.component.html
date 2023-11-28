@@ -1,0 +1,17 @@
+<div class="container-fluid">
+<!---->
+  <div class="table-responsive">
+           <table class="table table-bordered">
+              <tr>
+                <th>Id:</th>
+                <th>Name:</th>
+                <th>Email:</th>
+              </tr>
+              <tr *ngFor="let user of usersList;">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td><a href="mailto:{{user.email}}">{{user.email}}</a></td>
+              </tr>
+           </table>
+      </div>
+</div>

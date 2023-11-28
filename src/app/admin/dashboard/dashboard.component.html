@@ -1,0 +1,125 @@
+<div class="container-fluid">
+<div class="float-right">
+    Welcome {{isAdmin}}
+    <a href="javascript:void(0);" (click)="logout()">Logout</a>
+</div>
+<div class="form-group">
+      <button type="button" data-target="#addFoodModal" data-toggle="modal" class="btn btn-sm btn-outline-warning">Add Foods:</button>
+</div>
+    <div class="table-responsive">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>#</th>
+            <th>Food:</th>
+            <th>Description:</th>
+            <th>Price:</th>
+            <th>Pic:</th>
+        </tr>
+        <tr *ngFor="let foodItem of entireFoodData | paginate:{
+               totalItems:totalRows,
+               itemsPerPage:3,
+               currentPage:startLinkIndex
+        }">
+            <td>
+                <button type="button" class="btn btn-sm btn-outline-success" data-target="#editFoodModal" data-toggle="modal" (click)="selectFood(foodItem)">Edit</button> |
+                <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDelete(foodItem._id)">Delete</button>
+
+            </td>
+            <td>{{foodItem.food_name}}</td>
+            <td>{{foodItem.food_desc}}</td>
+            <td>{{foodItem.food_price}}</td>
+            <td><img [src]="foodItem.food_image" alt="No Image" [title]="foodItem.food_name" height="64px" width="64px"></td>
+        </tr>
+    </table>
+    <pagination-controls (pageChange)="startLinkIndex = $event"></pagination-controls>
+     
+</div>
+
+</div>
+
+
+
+<!--Adding Food Modal-->
+<div class="modal" id="addFoodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Food Item:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           <form [formGroup]="addfoodForm">
+            <div class="form-group">
+                <label>Food Name:</label>
+                <input type="text" formControlName="food_name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea class="form-control" formControlName="food_desc" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Price:</label>
+                <input type="number" formControlName="food_price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Upload Food Pic:</label>
+                <input type="file" (change)="onSelect($event)" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="button" (click)="onAddFood()" class="btn btn-sm btn-outline-info">Add</button>
+            </div>
+           </form>
+        </div>
+        <div class="modal-footer">
+          
+          <button id="closeModalBtn" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Add EditModal-->
+  <div class="modal" id="editFoodModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Food Info:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="editfoodForm">
+          <div class="form-group">
+            <label>Food Name:</label>
+            <input type="text" class="form-control" formControlName="food_name">
+          </div>
+          <div class="form-group">
+            <label>Description:</label>
+            <textarea class="form-control" cols="30" rows="10" formControlName="food_desc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Price:</label>
+            <input type="number" class="form-control" formControlName="food_price">
+          </div>
+          <div class="form-group">
+            <img id="image1" src="" height="100px" width="100px"/>
+            <label>Change Food Image:</label>
+            <input type="file" (change)="onFileSelectForeditModal($event)" class="form-control">
+          </div>
+          <div class="form-group">
+            <button (click)="onfoodUpdate()" type="button" class="btn btn-sm btn-outline-success">Update</button>
+          </div>
+          </form>
+            
+        </div>
+        <div class="modal-footer">
+          
+          <button id="editCloseModal" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

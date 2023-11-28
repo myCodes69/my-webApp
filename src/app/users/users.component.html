@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <header class="modal-header">
+                <h4>SignUP:</h4>
+            </header>
+            <form>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label>FirstName:</label>
+                            <input type="text" [(ngModel)]="myUser.firstName" name="fname" required class="form-control">
+                        </div>
+                        <div class="form-group">
+                        <label>middle name:</label>
+                        <input type="text" [(ngModel)]="myUser.middleName" name="mname" class="form-control" required>
+
+                    </div>
+                        <div class="col">
+                            <label>LastName:</label>
+                            <input type="text" [(ngModel)]="myUser.lastName" name="lname" required class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone:</label>
+                    <input type="number" name="phone" [(ngModel)]="myUser.phone" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" name="email" [(ngModel)]="myUser.email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" name="pass1" [(ngModel)]="myUser.pass1" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password:</label>
+                    <input type="password" name="pass2" [(ngModel)]="myUser.pass2" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" (click)="onSubmit()" class="btn btn-sm btn-outline-danger">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <header class="modal-header">
+                <h4>SignIN:</h4>
+            </header>
+            <form>
+                <div class="form-group">
+                    <label>Username:</label>
+                    <input type="text" [(ngModel)]="loginCheck.username" name="emailUser" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" [(ngModel)]="loginCheck.pass1" name="passw" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <button type="button" (click)="onLogin()" class="btn btn-sm btn-outline-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

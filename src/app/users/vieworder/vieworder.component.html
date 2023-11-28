@@ -1,0 +1,97 @@
+<div class="container">
+     
+        <div class="card">
+      <div class="card-header">
+        <div class="float-right">{{activeUser}}
+            <a href="javascript:void(0)" (click)="logout()">Logout</a>
+          </div>
+      <strong>{{billingInfo.order_date | date:'short'}}</strong> 
+        <span class="float-right"> <strong>Status:</strong> <span class="badge badge-pills badge-danger">Pending</span></span>
+      
+      </div>
+      <div class="card-body">
+      <div class="row mb-4">
+      <div class="col-sm-6">
+      <h6 class="mb-3">Customer Details:</h6>
+      <div>
+      <strong>{{billingInfo.user_name}}</strong>
+      </div>
+      
+      <div>Email:<a href="mailto: {{billingInfo.user_email}}"> {{billingInfo.user_email}}</a></div>
+      <div>Phone: <a href="tel:{{billingInfo.user_phone}}">{{billingInfo.user_phone}}</a></div>
+      </div>
+      
+       
+      
+      </div>
+      
+      <div class="table-responsive-sm">
+      <table class="table table-striped">
+      <thead>
+      <tr>
+      <th class="center">#</th>
+      <th>Item</th>
+      <th>Description</th>
+      
+      <th class="right">Price:</th>
+       
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td class="center">1</td>
+      <td class="left strong">{{billingInfo.food_name}}</td>
+      <td class="left">{{billingInfo.food_desc}}</td>
+      
+      <td class="right">{{billingInfo.food_price | currency:'INR'}}</td>
+     
+      </tr>
+       
+      </tbody>
+      </table>
+      </div>
+      <div class="row">
+      <div class="col-lg-4 col-sm-5">
+         <button class="btn btn-sm btn-outline-danger" onclick="window.print();">Print</button>
+      </div>
+      
+      <div class="col-lg-4 col-sm-5 ml-auto">
+      <table class="table table-clear">
+      <tbody>
+      <tr>
+      <td class="left">
+      <strong>Subtotal</strong>
+      </td>
+      <td class="right">{{billingInfo.food_price | currency:'INR'}}</td>
+      </tr>
+      <tr>
+      <td class="left">
+      <strong>Discount (20%)</strong>
+      </td>
+      <td class="right"> {{(billingInfo.food_price*0.2) | currency:'INR'}}</td>
+      </tr>
+      <tr>
+      <td class="left">
+       <strong>GST (18%)</strong>
+      </td>
+      <td class="right">{{ (billingInfo.food_price -(billingInfo.food_price*0.2)) *0.18 | currency:'INR'}}</td>
+      </tr>
+      <tr>
+      <td class="left">
+      <strong>Total</strong>
+      </td>
+      <td class="right">
+      <strong>{{ (billingInfo.food_price -(billingInfo.food_price*0.2))+((billingInfo.food_price -(billingInfo.food_price*0.2)) *0.18) | currency:'INR'}}</strong>
+      </td>
+      </tr>
+      </tbody>
+      </table>
+      
+      </div>
+      
+      </div>
+      
+      </div>
+      </div>
+      </div>
+ 
